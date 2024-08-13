@@ -3,6 +3,7 @@ const searchBtn = document.getElementById("search-btn");
 const titleInput = document.getElementById("title");
 const extraNameInput = document.getElementById("extra-name");
 const extraValueInput = document.getElementById("extra-value");
+const filterInput = document.getElementById("filter-title");
 
 const inputs = [titleInput, extraNameInput, extraValueInput];
 
@@ -12,6 +13,10 @@ const clearMovieInput = () => {
   for (const input of inputs) {
     input.value = "";
   }
+};
+
+const clearFilterInput = () => {
+  filterInput.value = "";
 };
 
 const renderMovies = (filter = "") => {
@@ -69,8 +74,9 @@ const addMovieHandler = () => {
 };
 
 const searchMovieHandler = () => {
-  const filterTerm = document.getElementById("filter-title").value;
+  const filterTerm = filterInput.value;
   renderMovies(filterTerm);
+  clearFilterInput();
 };
 
 addMovieBtn.addEventListener("click", addMovieHandler);
