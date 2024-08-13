@@ -1,47 +1,46 @@
 const addMovieBtn = document.getElementById("add-movie-btn");
 const searchBtn = document.getElementById("search-btn");
-const titleInput = document.getElementById("title")
+const titleInput = document.getElementById("title");
 const extraNameInput = document.getElementById("extra-name");
 const extraValueInput = document.getElementById("extra-value");
 
-const inputs = [titleInput, extraNameInput, extraValueInput]
+const inputs = [titleInput, extraNameInput, extraValueInput];
 
 const movies = [];
 
 const clearMovieInput = () => {
-for (const input of inputs) {
-    input.value = '';
-}
+  for (const input of inputs) {
+    input.value = "";
+  }
 };
 
 const renderMovies = () => {
-    const movieList = document.getElementById('movie-list');
+  const movieList = document.getElementById("movie-list");
 
+  if (movies.length === 0) {
+    movieList.classList.remove("visible");
+  } else {
+    movieList.classList.add("visible");
+  }
+  movieList.innerHTML = "";
 
-    if (movies.length === 0) {
-        movieList.classList.remove('visible');
-    } else {
-        movieList.classList.add('visible');
+  movies.forEach((movie) => {
+    const movieEl = document.createElement("li");
+    let text = movie.info.title + " - ";
+    for (const key in movie.info) {
+      if (key !== "title") {
+        text = text + `${key}: ${movie.info[key]}`;
+      }
     }
-    movieList.innerHTML = '';
-    
-    movies.forEach((movie)=>{
-        const movieEl = document.createElement('li');
-        let text = movie.info.title + ' - ';
-        for (const key in movie.info) {
-            if (key !== 'title') {
-                text = text + `${key}: ${movie.info[key]}`;
-            }
-        }
-        movieEl.textContent = text;
-        movieList.append(movieEl);
-    });
+    movieEl.textContent = text;
+    movieList.append(movieEl);
+  });
 };
 
 const addMovieHandler = () => {
-    const title = titleInput.value;
-    const extraName = extraNameInput.value;
-    const extraValue = extraValueInput.value;
+  const title = titleInput.value;
+  const extraName = extraNameInput.value;
+  const extraValue = extraValueInput.value;
 
   if (
     title.trim() === "" ||
@@ -53,10 +52,10 @@ const addMovieHandler = () => {
 
   const newMovie = {
     info: {
-        title: title,
-        [extraName]: extraValue
+      title: title,
+      [extraName]: extraValue,
     },
-    id: Math.random()
+    id: Math.random(),
   };
 
   movies.push(newMovie);
@@ -65,7 +64,4 @@ const addMovieHandler = () => {
   clearMovieInput();
 };
 
-
-
-
-addMovieBtn.addEventListener('click', addMovieHandler);
+addMovieBtn.addEventListener("click", addMovieHandler);
