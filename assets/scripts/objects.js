@@ -68,7 +68,6 @@ const addMovieHandler = () => {
   };
 
   movies.push(newMovie);
-  console.log(newMovie);
   renderMovies();
   clearMovieInput();
 };
